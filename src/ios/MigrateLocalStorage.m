@@ -214,8 +214,17 @@
 
 - (void)pluginInitialize
 {
+    BOOL executedMigrateLocalStoragePlugin = [[NSUserDefaults standardUserDefaults] boolForKey:@"executedMigrateLocalStoragePlugin"];
+    NSLog(@"executedMigrateLocalStoragePlugin: %d ", executedMigrateLocalStoragePlugin);
+    if (executedMigrateLocalStoragePlugin) {
+        return;
+    }
+
     BOOL lsResult = [self migrateLocalStorage];
     BOOL idbResult = [self migrateIndexedDB];
+
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"executedMigrateLocalStoragePlugin"];
+
     if (lsResult && idbResult) {
         // if all successfully migrated, do some cleanup!
         NSString* appLibraryFolder = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
