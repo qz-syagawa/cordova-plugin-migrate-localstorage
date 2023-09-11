@@ -215,7 +215,7 @@
 - (void)pluginInitialize
 {
     BOOL executedMigrateLocalStoragePlugin = [[NSUserDefaults standardUserDefaults] boolForKey:@"executedMigrateLocalStoragePlugin"];
-    NSLog(@"executedMigrateLocalStoragePlugin: %d ", executedMigrateLocalStoragePlugin);
+    // NSLog(@"executedMigrateLocalStoragePlugin: %d ", executedMigrateLocalStoragePlugin);
     if (executedMigrateLocalStoragePlugin) {
         return;
     }
